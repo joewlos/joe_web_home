@@ -4,11 +4,12 @@ from flask import Flask, render_template, request
 
 # Import required python packages
 import random
+import os
 
 # Configure app and database
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/joe_site'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # heroku = Heroku(app)
 
 # Initiate db for app
