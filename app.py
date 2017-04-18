@@ -1,6 +1,6 @@
 # Import required Flask functions
 from flask import Flask, render_template, request
-from flask_heroku import Heroku
+# from flask_heroku import Heroku
 
 # Import required python packages
 import random
@@ -9,7 +9,7 @@ import random
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/joe_site'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-heroku = Heroku(app)
+# heroku = Heroku(app)
 
 # Initiate db for app
 from models.shared import db
