@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Writing{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block data_display%}display: none;{% endblock %}
+{% block writing_display%}{% endblock %}
+{% block content %}
+<div id="page-content-wrapper">
+	<div class="container-fluid vertical-center">
+		<div class="row-fluid">
+		<h1 class="text-center">Academic Writing</h1>
+		<h2 class="text-center"><small>As a political science major at <a href="https://www.grinnell.edu/academics/areas/political-science" target="_blank">Grinnell College</a> in Iowa, I studied comparative politics and international relations.</small></h2>
+		<br>
+		<ul class="writing-list">
+		{% for text in texts %}
+			<li>{{ text|safe }}</li><br>
+		{% endfor %}
+		</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

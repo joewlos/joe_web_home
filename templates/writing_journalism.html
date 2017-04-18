@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Writing{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block data_display%}display: none;{% endblock %}
+{% block writing_display%}{% endblock %}
+{% block content %}
+<div id="page-content-wrapper">
+	<div class="container-fluid vertical-center">
+		<div class="row-fluid">
+			<h1 class="text-center">Journalism</h1>
+			<h2 class="text-center"><small>Ten years ago, I was a "<a href="https://www.nytimes.com/2016/11/02/us/politics/scholastic-reporting-campaign.html?_r=0" target="_blank">red shirt</a>" in the <a href="http://kpcnotebook.scholastic.com/" target="_blank">Scholastic News Kids Press Corps</a>. Since that time, I've continued to explore journalism, <a href="http://gumag.net/about/" target="_blank">co-refounding a magazine</a> in college and working as a freelance writer.</small></h2>
+			<br>
+			<ul class='writing-list'>
+				{% for text in texts %}
+					<li>{{ text|safe }}</li><br>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

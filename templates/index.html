@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}joewlos.com{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block data_display%}display: none;{% endblock %}
+{% block writing_display%}display: none;{% endblock %}
+{% block content %}
+<div id="page-content-wrapper">
+	<div class="container-fluid vertical-center">
+		<div class="row-fluid">
+		<h1 class="text-center">Welcome : )</h1>
+		<h2 class="text-center"><small>My name is Joe, and I'm a data nerd, news addict, and freelance writer. I'm interested in the intersection of politics and technology, and I'm passionate about projects that build a better world.</small></h2>
+		<div class="index-instructions">
+			<h2 class="text-center"><small>Click the icons below to see more!</small></h2>
+		</div>
+			<table class="index-table">
+				<tr>
+					<td>
+						<h1>
+							<a href="/static/documents/joe_wlos_resume.pdf" target="_blank" class="text-center index-icon"><i class="fa fa-id-badge fa-3x"></i></a>
+						</h1>
+					</td>
+					<td>
+						<h1>
+							<a href="/data_assessment" class="text-center index-icon"><i class="fa fa-bar-chart fa-3x"></i></a>
+						</h1>
+					</td>
+					<td>
+						<h1>
+							<a href="/writing_journalism" class="text-center index-icon"><i class="fa fa-file-text-o fa-3x"></i></a>
+						</h1>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

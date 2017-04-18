@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% block head %}
+			<!-- 
+			If you're here, you might be interested in how I developed this website.
+
+			I'm using the web framework Flask, the ORM SQLAlchemy, a Postgres database, and the templating language Jinja2. Heroku hosts the website.
+
+			Check out my Github to see the code!
+
+			Resources
+			- http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/
+			- http://fontawesome.io/
+			- https://startbootstrap.com/template-overviews/simple-sidebar/
+			-->
+			<title>{% block title %}{% endblock %} | Joe Wlos</title>
+			<link rel="icon" href="/static/images/home.ico">
+			<!-- Meta UTF and Bootstrap -->
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<!-- Google Font Bitter -->
+			<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+			<!-- CSS -->
+			<link rel= "stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<!-- Javascript -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% endblock %}
+	</head>
+	<body>
+		<div id="wrapper">
+			<!-- Home Button when Sidebar Hidden -->
+			<div class="home-button">
+				<a href="/index"><i class="fa fa-home fa-2x">  </i><br>Go<br>Home</a>
+			</div>
+			<!-- Sidebar -->
+			<div id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand">
+						<a href="/index">Joe Wlos</a>
+					</li>
+					<li>
+						<p id="data" class='top-list' onclick="openList(this.id)">Data<p>
+							<ul id="data-list" style="{% block data_display %}{% endblock %} list-style: none;">
+								<li><a href="/data_assessment">Property Assessment</a></li>
+								<li><a href="/data_bridges">Choropleth Maps</a></li>
+							</ul>
+						<p>
+					</li>
+					<li>
+						<p id="writing" class='top-list' onclick="openList(this.id)">Writing<p>
+							<ul id="writing-list" style="{% block writing_display%}{% endblock %} list-style: none;">
+								<li><a href="/writing_journalism">Journalism</a></li>
+								<li><a href="/writing_academic">Academic</a></li>
+							</ul>
+						<p>
+					</li>
+					<li>
+						<a href="/static/documents/joe_wlos_resume.pdf" target="_blank">Resume</a>
+					</li>
+					<li>
+						<p class="social-media">
+							<a href="mailto:joewlos17@gmail.com" class="social-line" target="_blank"><i class="fa fa-envelope fa-lg">  </i></a>
+							<a href="https://twitter.com/joewlos" class="social-line" target="_blank"><i class="fa fa-twitter fa-lg">  </i></a>
+							<a href="https://www.linkedin.com/in/joewlos/" class="social-line" target="_blank"><i class="fa fa-linkedin fa-lg">  </i></a>
+							<a href="https://github.com/joewlos" class="social-line" target="_blank"><i class="fa fa-github fa-lg">  </i></a>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<!-- Content -->
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+	<script>
+		function openList(id) {
+			idList = id.concat("-list")
+			var list = document.getElementById(idList);
+			if (list.style.display == "none") {
+				list.style.display = "block";
+			} else {
+				list.style.display = "none";
+			}
+			// Now make the opposite list hidden if it isn't already hidden
+			if (id.includes("data")) {
+				reverseList = document.getElementById("writing-list");
+			} else {
+				reverseList = document.getElementById("data-list");
+			}
+			reverseList.style.display = "none";
+		}
+	</script>
+</html>

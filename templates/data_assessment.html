@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Data{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block data_display%}{% endblock %}
+{% block writing_display%}display: none;{% endblock %}
+{% block content %}
+<div id="page-content-wrapper">
+	<div class="container-fluid vertical-center">
+		<div class="row-fluid">
+		<h1 class="text-center">Cook County Property Tax Comparisons</h1>
+		<h2 class="text-center"><small>The assessed value of a homeowner's land and buildings–not the market value–determines the amount of property tax owed each year.</small></h2>
+		<br>
+			<div class="data-content">
+			<p>However, due to quirks in Cook County's assessment process, the assessed value of a homeowner's land and buildings is sometimes significantly higher than the assessed values of similar properties in the same neighborhood. This higher value leads to higher property taxes for the homeowner.</p>
+			<p>To lower assessed values, homeowners can <a href="https://appeals.cookcountyboardofreview.com/" target="_blank">appeal their property assessment</a> to the Cook County Board of Review. In 2014, <a href="http://www.chicagotribune.com/news/local/politics/ct-cook-property-tax-appeals-met-0804-20150803-story.html" target="_blank">over 300,000 property owners</a> completed this appeals process.</p>
+			<p>An appeal has a higher chance of success if it lists "comparable properties" with similar characteristics but lower assessed values. While Cook County provides <a href="http://cookviewer1.cookcountyil.gov/jsviewer/mapviewer.html" target="_blank">a tool</a> for finding these comparable properties, its results are sometimes difficult to interpret.</p>
+			<p>Using open data from the Cook County <a href="https://datacatalog.cookcountyil.gov/" target="_blank">data catalogue</a> and the <a href="http://www.cookcountyassessor.com/" target="_blank">Cook County Assessor's Office</a>, I built a tool for property owners in Hyde Park to see the assessed value of their land and buildings and comparable properties in their neigborhood. Check it out below!</p>
+			<h3 id="hyde">Hyde Park Property Assessments</h3>
+			<br>
+			<form action="/data_assessment/overvalued_search#hyde" method="get">
+				<input type="submit" value="Search for an Overvalued Property"/>
+			</form>
+			<br>
+			{% block results_content %}
+				{% if selected_property is not none %}
+					<hr style="border-color: black"/>
+					<h4 align="center">Property <a href="{{ selected_property.assessor_office_url}}" target="_blank">{{ selected_property.official_pin14 }}</a> is Overvalued by ${{ overvalued }}!</h4>
+					<br>
+					<a href="{{ selected_property.image_url }}" target="_blank"><img src="{{ selected_property.image_url }}" style="border:1px solid black" height="24%" width="43%" align="right" alt="Cook County Assessor's Office"></a>
+					<p>Address: <b>{{ selected_property.property_location }}</b><br>Township: <b>{{ selected_property.township}}</b><br>City: <b>{{ selected_property.city}}</b><br><br>Land: <b>{{ "{:,}".format(selected_property.land_sqft) }} Sqft</b><br>Building: <b>{{ "{:,}".format(selected_property.building_sqft) }} Sqft</b><br>Exterior: <b>{{ selected_property.exterior }}</b><br>Estimated 2016 Market Value: <b>${{ "{:,}".format(selected_property.est_market_value_2016) }}</b><br>2016 Assessed Value: <b>${{ "{:,}".format(assessed_selected) }}</b></p>
+					<hr style="border-color: #f5f5f5"/>
+					<h4 align="center">Comparable Properties<br>with Lower Assessed Values</h4>
+					<table align="center" style="border-spacing: 4px;">
+						<tr>
+							<th style='text-align:center;vertical-align:middle;padding:2px 0;'>Property<br>PIN</th>
+							<th style='text-align:center;vertical-align:middle;padding:2px 0;'>2016<br>Assessed Value</th>
+						</tr>
+					{% for relevant_property in relevant_properties %}
+						<tr>
+							<td style='text-align:center;vertical-align:middle;padding:2px 0;'><a href="{{ relevant_property.assessor_office_url }}" target="_blank">{{ relevant_property.official_pin14 }}</a></td>
+							<td style='text-align:center;vertical-align:middle;padding:2px 0;'>${{ "{:,}".format(relevant_property.land_assessed_2016 + relevant_property.building_assessed_2016) }}
+						</tr>
+					{% endfor %}
+					</table>
+				{% endif %}
+			{% endblock %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
