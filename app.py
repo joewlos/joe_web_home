@@ -1,6 +1,6 @@
 # Import required Flask functions
 from flask import Flask, render_template, request
-from flask.ext.heroku import Heroku
+from flask_heroku import Heroku
 
 # Import required python packages
 import random
