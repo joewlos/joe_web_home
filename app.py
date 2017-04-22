@@ -1,5 +1,5 @@
 # Import required Flask functions
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 # from flask_heroku import Heroku
 
 # Import required python packages
@@ -25,6 +25,12 @@ from models.appeals import Properties
 @app.route('/index', methods=['GET'])
 def index_view():
     return render_template('index.html')
+
+# Assessment redirect
+@app.route('/data_assessment/redirect', methods=['GET'])
+def assessment_redirect():
+	return redirect(url_for(assessment_view,
+		assessment_type="overvalued_search", _anchor="hyde"))
 
 # Assessment data project
 @app.route('/data_assessment/', defaults={'assessment_type':None}, methods=['GET'])
