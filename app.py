@@ -29,8 +29,8 @@ def index_view():
 # Assessment redirect
 @app.route('/data_assessment_redirect/', methods=['GET'])
 def assessment_redirect():
-	return redirect(url_for(assessment_view,
-		assessment_type="overvalued_search", _anchor="hyde"))
+	return redirect(url_for(assessment_view("overvalued_search"),
+		_anchor="hyde"))
 
 # Assessment data project
 @app.route('/data_assessment/', defaults={'assessment_type':None}, methods=['GET'])
